@@ -246,7 +246,6 @@ function App() {
               ></img> */}
                 <img
                   src={divider_horizontal}
-                  alt="Foto"
                   style={{
                     aspectRatio: "1/1",
                     objectFit: "cover",
@@ -254,7 +253,6 @@ function App() {
                     top: "-150px",
                     right: "-85%",
                   }}
-                  className="image"
                 ></img>
               </div>
               <div
