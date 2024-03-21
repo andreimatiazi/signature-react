@@ -1,0 +1,154 @@
+p {
+  margin: 0;
+}
+
+::-webkit-input-placeholder {
+  font-size: 15px;
+}
+
+:-moz-placeholder {
+  font-size: 15px;
+}
+
+::-moz-placeholder {
+  font-size: 15px;
+}
+
+:-ms-input-placeholder {
+  font-size: 15px;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.wrap {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.page-title,
+.page-subtitle,
+.text-explain {
+  font-family: Arial, sans-serif;
+}
+.page-title {
+  font-size: 2.1em;
+  margin: 0;
+  padding: 0;
+  color: #00a2b1;
+}
+.page-subtitle {
+  font-size: 1.4em;
+  margin: 10px 0;
+  padding: 0;
+  font-weight: lighter;
+  color: #a09991;
+}
+
+.text-explain {
+  font-size: 1.1em;
+  margin: 25px 0;
+}
+
+.list-inputs,
+.list-steps {
+  padding: 0;
+}
+
+.list-steps {
+  font-family: Arial, sans-serif;
+  list-style-type: none;
+  color: #82817f;
+  margin-bottom: 25px;
+}
+
+.list-steps li {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.list-steps span {
+  color: #00a2b1;
+}
+
+.list-inputs {
+  list-style: none;
+}
+
+.list-inputs li {
+  margin-bottom: 25px;
+  color: #82817f;
+}
+
+.list-inputs label {
+  display: block;
+  font-family: Arial, sans-serif;
+  list-style-type: none;
+  color: #82817f;
+  text-align: left;
+}
+
+.list-inputs input,
+.list-inputs select {
+  border: 1px solid #00a2b1;
+  font-size: 18px;
+  width: 100%;
+  padding: 10px;
+  outline: none;
+}
+
+hr {
+  display: block;
+  margin: 40px 0;
+  border: 0;
+  border-top: 2px solid #e3e3e3;
+  border-style: dashed;
+}
+
+.output-signature-div {
+  overflow: hidden;
+}
+
+.output-signature-div .box-logo,
+.output-signature-div .box-info {
+  float: left;
+}
+
+.output-signature-div .box-logo {
+  margin: 0 15px 0 10px;
+}
+
+.output-signature-div .box-info a {
+  color: #666666;
+  text-decoration: none;
+}
+
+select {
+  background: #00a2b1 url(img/seta-select.png) right no-repeat;
+  color: #fff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select option {
+  background: #949599;
+  outline: none;
+  font-size: 16px;
+  border: none;
+}
+
+textarea {
+  font-family: arial;
+  width: 80%;
+  height: 80px;
+  border: 1px solid #00a2b1;
+  resize: none;
+  padding: 7px 0 0 10px;
+  box-sizing: border-box;
+  outline: none;
+  font-family: "amplesoft-boldbold";
+}

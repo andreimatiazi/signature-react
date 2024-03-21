@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Signature Generator</title>
+    <style>
+        /* Estilos CSS para a assinatura de e-mail */
+        body {
+            font-family: Montserrat, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .email-signature {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .job-title {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .contact-info a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        .image {
+            max-width: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-signature">
+        <form id="email-signature-form">
+            <input type="text" id="name" name="name" placeholder="Seu Nome">
+            <input type="text" id="job-title" name="job-title" placeholder="Seu Cargo">
+            <input type="text" id="email" name="email" placeholder="Seu E-mail">
+            <input type="text" id="website" name="website" placeholder="Seu Website">
+            <input type="text" id="phone" name="phone" placeholder="Seu Telefone">
+            <input type="file" id="photo" name="photo" accept="image/*">
+            <input type="submit" value="Gerar Assinatura">
+        </form>
+        <div id="signature-preview" style="display: none;">
+            <img src="#" id="preview-image" alt="Foto" class="image">
+            <div id="preview-name" class="name"></div>
+            <div id="preview-job-title" class="job-title"></div>
+            <div class="contact-info">
+                <p id="preview-email"></p>
+                <p id="preview-website"></p>
+                <p id="preview-phone"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("email-signature-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var name = document.getElementById("name").value;
+            var jobTitle = document.getElementById("job-title").value;
+            var email = document.getElementById("email").value;
+            var website = document.getElementById("website").value;
+            var phone = document.getElementById("phone").value;
+            var photo = document.getElementById("photo").files[0];
+
+            // Atualiza a visualização da assinatura com os dados fornecidos
+            document.getElementById("preview-name").textContent = name;
+            document.getElementById("preview-job-title").textContent = jobTitle;
+            document.getElementById("preview-email").innerHTML = "Email: <a href='mailto:" + email + "'>" + email + "</a>";
+            document.getElementById("preview-website").innerHTML = "Website: <a href='" + website + "'>" + website + "</a>";
+            document.getElementById("preview-phone").textContent = "Telefone: " + phone;
+
+            // Atualiza a visualização da foto, se uma foto foi fornecida
+            if (photo) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById("preview-image").src = e.target.result;
+                };
+                reader.readAsDataURL(photo);
+            }
+
+            // Exibe a visualização da assinatura
+            document.getElementById("signature-preview").style.display = "block";
+        });
+    </script>
+</body>
+</html>

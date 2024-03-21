@@ -1,0 +1,44 @@
+.profile-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+.image-section,
+.info-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile {
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+h1 {
+  color: #ac9254;
+  font-family: Poppins, sans-serif;
+  font-size: 58px;
+  font-weight: 700;
+}
+.profession {
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  margin-top: 19px;
+}
+.contact-info {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-size: 32px;
+}
+.contact-icon {
+  width: 38px;
+}
+@media (max-width: 991px) {
+  .profile-container {
+    flex-direction: column;
+  }
+  h1 {
+    font-size: 40px;
+  }
+}
