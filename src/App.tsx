@@ -226,14 +226,8 @@ function App() {
                 fontFamily: "Arial",
               }}
             >
-              <div>
-                <img
-                  id="foto"
-                  src={background_right}
-                  style={{ display: "block" }}
-                  alt="Silva & Oliveira"
-                  title="Silva & Oliveira"
-                />
+              <div style={{ width: "253px" }}>
+                <img id="foto" src={background_right} />
                 {/* <img
                 src="#"
                 id="preview-image"
