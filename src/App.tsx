@@ -17,7 +17,8 @@ function App() {
   const [cargo, setCargo] = useState("");
   // const [telefone, setTelefone] = useState("");
   // const [celular, setCelular] = useState("");
-  const [foto, setFoto] = useState();
+  // const [foto, setFoto] = useState<File | null>();
+  const [foto] = useState<File | null>();
   // const [htmlCopy, setHtmlCopy] = useState("");
   const signatureRef = useRef<HTMLDivElement>(null);
   // Adicione mais estados conforme necessário
@@ -120,8 +121,8 @@ function App() {
     const img = document.getElementById("preview-image");
     if (foto && img) {
       const reader = new FileReader();
-      reader.onload = function (e) {
-        img.src = e.target.result;
+      reader.onload = function () {
+        // img.src = e.target.result;// descomentar depois
       };
       reader.readAsDataURL(foto);
     }
@@ -175,16 +176,16 @@ function App() {
               maxLength={40}
               onKeyUp={handleMaiuscula}
             /> */}
-            <input
+            {/* <input
               type="file"
               id="photo"
               name="photo"
               onChange={(e) => {
                 console.log(e);
-                setFoto(e?.target?.files[0] ?? undefined);
+                setFoto(e?.target?.files[0]);
               }}
               accept="image/*"
-            />
+            /> */}
           </li>
           {/* Outros campos de entrada aqui */}
         </ul>
@@ -316,7 +317,7 @@ function App() {
                     width: "250px",
                   }}
                 >
-                  <img width={19} height={19} src={phone} />{" "}
+                  <img width={19} height={19} src={pin} />{" "}
                   <p>
                     Av. Jabaquara, 2958 - 10º andar CJ 101/102 - Metrô São Judas
                     São Paulo - SP
