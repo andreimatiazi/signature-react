@@ -9,106 +9,22 @@ import qr_code from "./assets/qr_code.png";
 import insta from "./assets/insta.png";
 import site from "./assets/site.png";
 import divider_horizontal from "./assets/divider_horizontal.png";
+import background from "./assets/Background.png";
 
 import "./App.css"; // Importe seus estilos aqui
 
 function App() {
   const [nome, setNome] = useState("");
   const [cargo, setCargo] = useState("");
-  // const [telefone, setTelefone] = useState("");
-  // const [celular, setCelular] = useState("");
+  const [telefone, setTelefone] = useState("");
+  const [celular, setCelular] = useState("");
   // const [foto, setFoto] = useState<File | null>();
   const [foto] = useState<File | null>();
   // const [htmlCopy, setHtmlCopy] = useState("");
   const signatureRef = useRef<HTMLDivElement>(null);
   // Adicione mais estados conforme necessário
 
-  // useEffect(() => {
-  //   setHtmlCopy(`<table cellpadding="0" cellspacing="0" style="border-collapse: collapse;" width="400">
-  //   <tbody>
-  //     <tr>
-  //       <td>
-  //         <div style="width: 800px; display: flex; align-items: center;">
-  //           <div>
-  //             <img id="foto" src="${background_right}" style="display: block;" alt="Silva & Oliveira" title="Silva & Oliveira" />
-  //             <!-- <img
-  //               src="#"
-  //               id="preview-image"
-  //               alt="Foto"
-  //               width="156"
-  //               height="156"
-  //               style="
-  //                 aspect-ratio: 1/1;
-  //                 object-fit: cover;
-  //                 position: relative;
-  //                 top: -205px;
-  //                 right: -50px;
-  //                 border-radius: 50%;
-  //               "
-  //               class="image"
-  //             /> -->
-  //             <img src="${divider_horizontal}" alt="Foto" style="aspect-ratio: 1/1; object-fit: cover; position: relative; top: -140px; right: -85%;" class="image" />
-  //           </div>
-  //           <div style="width: 325px; padding: 1rem;">
-  //             <p>${nome}</p>
-  //             <p>Contador/advogado</p>
-  //             <div style="display: flex; align-items: center; gap: 0.5rem;">
-  //               <img width="19" height="19" src="${whats}" /> <p>(11) 99999-9999</p>
-  //             </div>
-  //             <div style="display: flex; align-items: center; gap: 0.5rem;">
-  //               <img width="19" height="19" src="${phone}" /> <p>(11) 99999-9999</p>
-  //             </div>
-  //             <div style="display: flex; gap: 0.5rem; width: 250px;">
-  //               <img width="19" height="19" src="${pin}" /> <p>Av. Jabaquara, 2958 - 10º andar CJ 101/102 - Metrô São Judas São Paulo - SP</p>
-  //             </div>
-  //           </div>
-  //           <div style="display: flex; align-items: center; width: 225px;">
-  //             <img src="${divider_vertical}" />
-  //             <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; gap: 1rem;">
-  //               <img width="169" style="object-fit: cover;" src="${logo}" />
-  //               <div style="display: flex; gap: 1rem;">
-  //                 <img width="86" height="86" src="${qr_code}" />
-  //                 <div style="display: flex; flex-direction: column; align-items: normal; justify-content: space-between;">
-  //                   <img width="39" height="39" src="${insta}" />
-  //                   <img width="39" height="39" src="${site}" />
-  //                 </div>
-  //               </div>
-  //             </div>
-  //           </div>
-  //         </div>
-  //       </td>
-  //     </tr>
-  //   </tbody>
-  // </table>`);
-  // }, [foto, nome]);
-
   const handleCopiarAssinatura = () => {
-    // const assinaturaElement = document.getElementById("assinatura");
-    // if (assinaturaElement) {
-    //   // const assinaturaTexto = assinaturaElement.value;
-    //   navigator.clipboard
-    //     .writeText(htmlCopy)
-    //     .then(() => {
-    //       // setAssinaturaCopiada(true);
-    //       alert("Assinatura copiada!");
-    //     })
-    //     .catch((error) => {
-    //       console.error("Erro ao copiar assinatura:", error);
-    //     });
-    //   // setAssinaturaCopiada(true);
-    // }
-    // if (window.getSelection) {
-    //   const range = document.createRange();
-    //   if (signatureRef.current) {
-    //     range.selectNode(signatureRef?.current.querySelector("table") as Node);
-    //   }
-    //   window.getSelection()?.removeAllRanges();
-    //   window.getSelection()?.addRange(range);
-    //   document.execCommand("copy");
-    //   // this.gaEventClick('copy as select')
-    //   // this.showSuccessPromo = true
-    // }
-
     const copyBoxElement = signatureRef.current;
     if (copyBoxElement) {
       copyBoxElement.contentEditable = "true";
@@ -165,6 +81,26 @@ function App() {
             />
           </li>
           <li>
+            <label>Celular: </label>
+            <input
+              type="text"
+              value={celular}
+              onChange={(e) => setCelular(e.target.value)}
+              placeholder="Celular:"
+              maxLength={40}
+            />
+          </li>
+          <li>
+            <label>Telefone: </label>
+            <input
+              type="text"
+              value={telefone}
+              onChange={(e) => setTelefone(e.target.value)}
+              placeholder="Telefone:"
+              maxLength={40}
+            />
+          </li>
+          <li>
             <label>Nome: </label>
             {/* <input
               type="file"
@@ -187,46 +123,28 @@ function App() {
               accept="image/*"
             /> */}
           </li>
-          {/* Outros campos de entrada aqui */}
         </ul>
-        {/* <a
-          href="#"
-          onClick={handleTrocarFoto}
-          id="btn"
-          className="trocar-assinatura"
-        >
-          Trocar Assinatura
-        </a> */}
       </div>
-      <button className="btn-save" onClick={handleCopiarAssinatura}>
+      <button
+        style={{ marginBottom: "1rem" }}
+        className="btn-save"
+        onClick={handleCopiarAssinatura}
+      >
         Copiar assinatura
       </button>
-
-      {/* inicio assinatura */}
-      {/* <div
-        className="content"
-        dangerouslySetInnerHTML={{ __html: htmlCopy }}
-      ></div> */}
-      {/* <div ref="preview" className="email-preview"> */}
       <div ref={signatureRef} className="email-preview">
         <table
           cellPadding="0"
           cellSpacing="0"
           style={{
             borderCollapse: "collapse",
+            background: `url(${background})`,
           }}
-          width="400"
+          width="800"
         >
           <tbody>
-            <div
-              style={{
-                width: "800px",
-                display: "flex",
-                alignItems: "center",
-                fontFamily: "Arial",
-              }}
-            >
-              <div style={{ width: "253px" }}>
+            <tr>
+              <td width={126.5}>
                 <img id="foto" src={background_right} />
                 {/* <img
                 src="#"
@@ -250,108 +168,110 @@ function App() {
                     aspectRatio: "1/1",
                     objectFit: "cover",
                     position: "relative",
-                    top: "-150px",
-                    right: "-85%",
+                    top: "-160px",
+                    right: "-67%",
                   }}
                 ></img>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.50rem",
-                  width: "325px",
-                  padding: "1rem",
-                  color: "#000",
-                  fontSize: "14px",
-                  fontWeight: "inherit",
-                }}
-              >
-                <p
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: "28px",
-                    color: "#AC9254",
-                  }}
-                >
-                  {nome || "Nome"}
-                </p>
-                <p>{cargo || "Contador/advogado"}</p>
-                <div
-                  style={{
-                    display: "flex",
-                    paddingTop: "0.5rem",
-                    // justifyContent: "center",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                  }}
-                >
-                  <img width={19} height={19} src={whats} />{" "}
-                  <p>(11) 99999-9999</p>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    // justifyContent: "center",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                  }}
-                >
-                  <img width={19} height={19} src={phone} />{" "}
-                  <p>(11) 99999-9999</p>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    // justifyContent: "center",
-                    // alignItems: "center",
-                    gap: "0.5rem",
-                    width: "250px",
-                  }}
-                >
-                  <img width={19} height={19} src={pin} />{" "}
-                  <p>
-                    Av. Jabaquara, 2958 - 10º andar CJ 101/102 - Metrô São Judas
-                    São Paulo - SP
-                  </p>
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  width: "225px",
-                }}
-              >
+              </td>
+              <td width={250}>
+                <table width={250}>
+                  <tbody>
+                    <tr>
+                      <td
+                        valign="top"
+                        style={{
+                          fontFamily: "Arial, sans-serif",
+                          fontWeight: "bold",
+                          fontSize: "28px",
+                          color: "#AC9254",
+                        }}
+                      >
+                        {nome || "Nome"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        valign="top"
+                        style={{
+                          fontFamily: "Arial, sans-serif",
+                          color: "#000",
+                          fontSize: "14px",
+                          fontWeight: "inherit",
+                        }}
+                      >
+                        {cargo || "Contador/advogado"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td width={162.5} valign="top" height="23"></td>
+                    </tr>
+                    <tr>
+                      <td
+                        style={{ display: "flex", gap: "8px" }}
+                        valign="top"
+                        height="23"
+                      >
+                        <img width={19} height={19} src={whats} />
+                        {celular || "(11) 99999-9999"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td
+                        style={{ display: "flex", gap: "8px" }}
+                        valign="top"
+                        height="23"
+                      >
+                        <img width={19} height={19} src={phone} />
+                        {telefone || "(11) 99999-9999"}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td style={{ display: "flex", gap: "8px" }} valign="top">
+                        <img width={19} height={19} src={pin} />
+                        Av. Jabaquara, 2958 - 10º andar CJ 101/102 - Metrô São
+                        Judas São Paulo - SP
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td width={50}>
                 <img src={divider_vertical} />
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "100%",
-                    gap: "1rem",
-                  }}
-                >
-                  <img width={169} style={{ objectFit: "cover" }} src={logo} />
-                  <div style={{ display: "flex", gap: "1rem" }}>
-                    <img width={86} height={86} src={qr_code} />
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "normal",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <img width={39} height={39} src={insta} />
-                      <img width={39} height={39} src={site} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              </td>
+              <td width={225} valign="middle">
+                <table>
+                  <tr>
+                    <img
+                      width={169}
+                      style={{ objectFit: "cover" }}
+                      src={logo}
+                    />
+                  </tr>
+                  <tr>
+                    <td height="16"></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img width={86} height={86} src={qr_code} />
+                    </td>
+                    <td>
+                      <table>
+                        <tr>
+                          <td>
+                            <img width={39} height={39} src={insta} />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td valign="baseline">
+                            <img width={39} height={39} src={site} />
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
