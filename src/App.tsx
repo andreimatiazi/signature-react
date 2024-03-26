@@ -9,7 +9,7 @@ import qr_code from "./assets/qr_code.png";
 import insta from "./assets/insta.png";
 import site from "./assets/site.png";
 import divider_horizontal from "./assets/divider_horizontal.png";
-import background from "./assets/Background.png";
+import background from "./assets/background_table.png";
 
 import "./App.css"; // Importe seus estilos aqui
 
