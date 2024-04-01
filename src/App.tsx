@@ -38,7 +38,9 @@ function App() {
     if (foto && img) {
       const reader = new FileReader();
       reader.onload = function () {
-        img.style.backgroundImage = `url(${reader.result})`;
+        const dataURL = reader.result;
+        img.style.backgroundImage = `url(${dataURL})`;
+        // img.setAttribute("src", dataURL as string);
       };
       reader.readAsDataURL(foto);
     }
@@ -101,7 +103,7 @@ function App() {
             />
           </li>
           <li>
-            <label>Nome: </label>
+            <label>Selecione a foto: </label>
             {/* <input
               type="file"
               value={foto}
@@ -126,6 +128,19 @@ function App() {
           </li>
         </ul>
       </div>
+      <div
+        style={{
+          marginBottom: "2rem",
+          fontFamily: "Arial",
+          textAlign: "center",
+        }}
+      >
+        <h3>
+          Ao finalizar selecione a assinatura copie e cole posteriormente no seu
+          e-mail
+        </h3>
+      </div>
+
       <div ref={signatureRef} className="email-preview">
         <table
           cellPadding="0"
@@ -139,9 +154,8 @@ function App() {
           <tbody>
             <tr>
               <td width={126}>
-                <img
+                <div
                   id="preview-image"
-                  src={background_right}
                   style={{
                     width: "126px",
                     height: "126px",
@@ -150,23 +164,9 @@ function App() {
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
                   }}
-                />
-                {/* <img
-                src="#"
-                id="preview-image"
-                alt="Foto"
-                width={156}
-                height={156}
-                style={{
-                  aspectRatio: "1/1",
-                  objectFit: "cover",
-                  position: "relative",
-                  top: "-205px",
-                  right: "-50px",
-                  borderRadius: "50%",
-                }}
-                className="image"
-              ></img> */}
+                >
+                  <img src={background_right} />
+                </div>
               </td>
               <td width={154}>
                 <table width={154}>
