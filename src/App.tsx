@@ -18,27 +18,27 @@ function App() {
   const [cargo, setCargo] = useState("");
   const [telefone, setTelefone] = useState("");
   const [celular, setCelular] = useState("");
-  // const [foto, setFoto] = useState<File | null>();
-  const [foto] = useState<File | null>();
+  const [foto, setFoto] = useState<File | null>();
+  // const [foto] = useState<File | null>();
   // const [htmlCopy, setHtmlCopy] = useState("");
   const signatureRef = useRef<HTMLDivElement>(null);
   // Adicione mais estados conforme necessário
 
-  const handleCopiarAssinatura = () => {
-    const copyBoxElement = signatureRef.current;
-    if (copyBoxElement) {
-      copyBoxElement.contentEditable = "true";
-      copyBoxElement.focus();
-      navigator.clipboard.writeText(String(copyBoxElement.innerHTML));
-    }
-  };
+  // const handleCopiarAssinatura = () => {
+  //   const copyBoxElement = signatureRef.current;
+  //   if (copyBoxElement) {
+  //     copyBoxElement.contentEditable = "true";
+  //     copyBoxElement.focus();
+  //     navigator.clipboard.writeText(String(copyBoxElement.innerHTML));
+  //   }
+  // };
 
   useEffect(() => {
     const img = document.getElementById("preview-image");
     if (foto && img) {
       const reader = new FileReader();
       reader.onload = function () {
-        // img.src = e.target.result;// descomentar depois
+        img.style.backgroundImage = `url(${reader.result})`;
       };
       reader.readAsDataURL(foto);
     }
@@ -112,26 +112,20 @@ function App() {
               maxLength={40}
               onKeyUp={handleMaiuscula}
             /> */}
-            {/* <input
+            <input
               type="file"
               id="photo"
               name="photo"
               onChange={(e) => {
-                console.log(e);
-                setFoto(e?.target?.files[0]);
+                if (e?.target?.files) {
+                  setFoto(e?.target?.files[0]);
+                }
               }}
               accept="image/*"
-            /> */}
+            />
           </li>
         </ul>
       </div>
-      <button
-        style={{ marginBottom: "1rem" }}
-        className="btn-save"
-        onClick={handleCopiarAssinatura}
-      >
-        Copiar assinatura
-      </button>
       <div ref={signatureRef} className="email-preview">
         <table
           cellPadding="0"
@@ -140,12 +134,23 @@ function App() {
             borderCollapse: "collapse",
             background: `url(${background})`,
           }}
-          width="800"
+          width="400"
         >
           <tbody>
             <tr>
-              <td width={126.5}>
-                <img id="foto" src={background_right} />
+              <td width={126}>
+                <img
+                  id="preview-image"
+                  src={background_right}
+                  style={{
+                    width: "126px",
+                    height: "126px",
+                    backgroundSize: "115px",
+                    objectFit: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                  }}
+                />
                 {/* <img
                 src="#"
                 id="preview-image"
@@ -162,19 +167,9 @@ function App() {
                 }}
                 className="image"
               ></img> */}
-                <img
-                  src={divider_horizontal}
-                  style={{
-                    aspectRatio: "1/1",
-                    objectFit: "cover",
-                    position: "relative",
-                    top: "-160px",
-                    right: "-67%",
-                  }}
-                ></img>
               </td>
-              <td width={250}>
-                <table width={250}>
+              <td width={154}>
+                <table width={154}>
                   <tbody>
                     <tr>
                       <td
@@ -182,7 +177,7 @@ function App() {
                         style={{
                           fontFamily: "Arial, sans-serif",
                           fontWeight: "bold",
-                          fontSize: "28px",
+                          fontSize: "0.8rem",
                           color: "#AC9254",
                         }}
                       >
@@ -195,39 +190,65 @@ function App() {
                         style={{
                           fontFamily: "Arial, sans-serif",
                           color: "#000",
-                          fontSize: "14px",
+                          fontSize: "0.5rem",
                           fontWeight: "inherit",
                         }}
                       >
                         {cargo || "Contador/advogado"}
                       </td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <td width={162.5} valign="top" height="23"></td>
+                    </tr> */}
+                    <tr>
+                      <td valign="top" height="15">
+                        <img
+                          src={divider_horizontal}
+                          // style={{
+                          //   aspectRatio: "1/1",
+                          //   objectFit: "cover",
+                          // }}
+                        ></img>
+                      </td>
                     </tr>
                     <tr>
                       <td
-                        style={{ display: "flex", gap: "8px" }}
+                        style={{
+                          display: "flex",
+                          gap: "8px",
+                          fontSize: "0.46rem",
+                        }}
                         valign="top"
-                        height="23"
+                        height="15"
                       >
-                        <img width={19} height={19} src={whats} />
+                        <img width={9.51} height={9.51} src={whats} />
                         {celular || "(11) 99999-9999"}
                       </td>
                     </tr>
                     <tr>
                       <td
-                        style={{ display: "flex", gap: "8px" }}
+                        style={{
+                          display: "flex",
+                          gap: "8px",
+                          fontSize: "0.46rem",
+                        }}
                         valign="top"
-                        height="23"
+                        height="15"
                       >
-                        <img width={19} height={19} src={phone} />
+                        <img width={9.51} height={9.51} src={phone} />
                         {telefone || "(11) 99999-9999"}
                       </td>
                     </tr>
                     <tr>
-                      <td style={{ display: "flex", gap: "8px" }} valign="top">
-                        <img width={19} height={19} src={pin} />
+                      <td
+                        style={{
+                          display: "flex",
+                          gap: "8px",
+                          fontSize: "0.4275rem",
+                        }}
+                        valign="top"
+                      >
+                        <img width={9.51} height={9.51} src={pin} />
                         Av. Jabaquara, 2958 - 10º andar CJ 101/102 - Metrô São
                         Judas São Paulo - SP
                       </td>
@@ -235,40 +256,53 @@ function App() {
                   </tbody>
                 </table>
               </td>
-              <td width={50}>
-                <img src={divider_vertical} />
+              <td valign="middle" width={20}>
+                <table width={20}>
+                  <tr>
+                    <td valign="middle">
+                      <img src={divider_vertical} />
+                    </td>
+                  </tr>
+                </table>
               </td>
-              <td width={225} valign="middle">
-                <table>
+              <td width={100} valign="middle">
+                <table width={100}>
                   <tr>
-                    <img
-                      width={169}
-                      style={{ objectFit: "cover" }}
-                      src={logo}
-                    />
+                    <td height={10}></td>
                   </tr>
                   <tr>
+                    <td valign="baseline">
+                      <img
+                        width={84}
+                        style={{ objectFit: "cover" }}
+                        src={logo}
+                      />
+                    </td>
+                  </tr>
+                  {/* <tr>
                     <td height="16"></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img width={86} height={86} src={qr_code} />
-                    </td>
-                    <td>
-                      <table>
-                        <tr>
-                          <td>
-                            <img width={39} height={39} src={insta} />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td valign="baseline">
-                            <img width={39} height={39} src={site} />
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
+                  </tr> */}
+                  <table>
+                    <tr>
+                      <td>
+                        <img width={43} height={43} src={qr_code} />
+                      </td>
+                      <td>
+                        <table>
+                          <tr>
+                            <td>
+                              <img width={19} height={19} src={insta} />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td valign="middle">
+                              <img width={19} height={19} src={site} />
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
                 </table>
               </td>
             </tr>
