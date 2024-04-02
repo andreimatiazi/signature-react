@@ -105,7 +105,9 @@ function App() {
             />
           </li>
           <li>
-            <label>Selecione a foto: </label>
+            <label>
+              Selecione a foto em formato quadrado (ex.: 500px500px):
+            </label>
             <input
               type="file"
               id="photo"
@@ -163,17 +165,17 @@ function App() {
             borderCollapse: "collapse",
             background: `url(${background})`,
           }}
-          width="400"
+          width="530"
         >
           <tbody>
             <tr>
-              <td width={126}>
+              <td width={166.62}>
                 <div
                   id="preview-image"
                   style={{
-                    width: "126px",
-                    height: "126px",
-                    backgroundSize: "113px 113px",
+                    width: "166.62px",
+                    height: "166.32px",
+                    backgroundSize: "90%",
                     objectFit: "contain",
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
@@ -183,8 +185,8 @@ function App() {
                   <img src={background_right} />
                 </div>
               </td>
-              <td width={154}>
-                <table width={154}>
+              <td width={200.38}>
+                <table width={200.39}>
                   <tbody>
                     <tr>
                       <td
@@ -192,7 +194,7 @@ function App() {
                         style={{
                           fontFamily: "Arial, sans-serif",
                           fontWeight: "bold",
-                          fontSize: "0.8rem",
+                          fontSize: "1.117rem",
                           color: "#AC9254",
                         }}
                       >
@@ -205,25 +207,16 @@ function App() {
                         style={{
                           fontFamily: "Arial, sans-serif",
                           color: "#000",
-                          fontSize: "0.5rem",
+                          fontSize: "0.9rem",
                           fontWeight: "inherit",
                         }}
                       >
                         {cargo || "Contador/advogado"}
                       </td>
                     </tr>
-                    {/* <tr>
-                      <td width={162.5} valign="top" height="23"></td>
-                    </tr> */}
                     <tr>
-                      <td valign="top" height="15">
-                        <img
-                          src={divider_horizontal}
-                          // style={{
-                          //   aspectRatio: "1/1",
-                          //   objectFit: "cover",
-                          // }}
-                        ></img>
+                      <td valign="middle" height="15">
+                        <img src={divider_horizontal} />
                       </td>
                     </tr>
                     <tr>
@@ -231,13 +224,17 @@ function App() {
                         style={{
                           display: "flex",
                           gap: "8px",
-                          fontSize: "0.46rem",
+                          fontSize: "0.615rem",
                         }}
                         valign="top"
                         height="15"
                       >
-                        <img width={9.51} height={9.51} src={whats} />
-                        {celular || "(11) 99999-9999"}
+                        <img width={11.68} height={12.3} src={whats} />
+                        <a
+                          href={`https://api.whatsapp.com/send?phone=55${celular}`}
+                        >
+                          {celular || "(11) 99999-9999"}
+                        </a>
                       </td>
                     </tr>
                     <tr>
@@ -245,12 +242,12 @@ function App() {
                         style={{
                           display: "flex",
                           gap: "8px",
-                          fontSize: "0.46rem",
+                          fontSize: "0.615rem",
                         }}
                         valign="top"
                         height="15"
                       >
-                        <img width={9.51} height={9.51} src={phone} />
+                        <img width={12.6} height={12.6} src={phone} />
                         {telefone || "(11) 99999-9999"}
                       </td>
                     </tr>
@@ -259,20 +256,22 @@ function App() {
                         style={{
                           display: "flex",
                           gap: "8px",
-                          fontSize: "0.4275rem",
+                          fontSize: "0.566rem",
                         }}
                         valign="top"
                       >
-                        <img width={9.51} height={9.51} src={pin} />
-                        Av. Jabaquara, 2958 - 10º andar CJ 101/102 - Metrô São
-                        Judas São Paulo - SP
+                        <img width={12.6} height={12.6} src={pin} />
+                        <a href="https://maps.app.goo.gl/oVBuAv3i8oEoLjdz8">
+                          Av. Jabaquara, 2958 - 10º andar CJ 101/102 - Metrô São
+                          Judas São Paulo - SP
+                        </a>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </td>
-              <td valign="middle" width={20}>
-                <table width={20}>
+              <td valign="middle" width={25}>
+                <table width={25}>
                   <tr>
                     <td valign="middle">
                       <img src={divider_vertical} />
@@ -280,7 +279,7 @@ function App() {
                   </tr>
                 </table>
               </td>
-              <td width={100} valign="middle">
+              <td width={138} valign="middle">
                 <table width={100}>
                   <tr>
                     <td height={10}></td>
@@ -288,7 +287,7 @@ function App() {
                   <tr>
                     <td valign="baseline">
                       <img
-                        width={84}
+                        width={111.6}
                         style={{ objectFit: "cover" }}
                         src={logo}
                       />
@@ -300,18 +299,22 @@ function App() {
                   <table>
                     <tr>
                       <td>
-                        <img width={43} height={43} src={qr_code} />
+                        <img width={57.18} height={57.18} src={qr_code} />
                       </td>
                       <td>
                         <table>
                           <tr>
                             <td>
-                              <img width={19} height={19} src={insta} />
+                              <a href="https://www.instagram.com/contabilsilvaeoliveira/">
+                                <img width={25.52} height={26.13} src={insta} />
+                              </a>
                             </td>
                           </tr>
                           <tr>
                             <td valign="middle">
-                              <img width={19} height={19} src={site} />
+                              <a href="https://silvaeoliveira.com.br/">
+                                <img width={25.21} height={25.52} src={site} />
+                              </a>
                             </td>
                           </tr>
                         </table>
