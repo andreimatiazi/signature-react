@@ -10,6 +10,16 @@ import insta from "./assets/insta.png";
 import site from "./assets/site.png";
 import divider_horizontal from "./assets/divider_horizontal.png";
 import background from "./assets/background_table.png";
+import { initializeApp } from "firebase/app";
+import "firebase/firestore";
+import "firebase/storage";
+import {
+  getStorage,
+  ref as storageRef,
+  getDownloadURL,
+  uploadBytes,
+} from "firebase/storage";
+import { getAnalytics } from "firebase/analytics";
 
 import "./App.css"; // Importe seus estilos aqui
 
@@ -18,33 +28,24 @@ function App() {
   const [cargo, setCargo] = useState("");
   const [telefone, setTelefone] = useState("");
   const [celular, setCelular] = useState("");
-  const [foto, setFoto] = useState<File | null>();
-  // const [foto] = useState<File | null>();
-  // const [htmlCopy, setHtmlCopy] = useState("");
+  const [imgLink, setImgLink] = useState("");
+
   const signatureRef = useRef<HTMLDivElement>(null);
-  // Adicione mais estados conforme necessário
+  const firebaseConfig = {
+    apiKey: import.meta.env.VITE_API_API_KEY,
+    authDomain: import.meta.env.VITE_API_AUTH_DOMAIN,
+    databaseURL: import.meta.env.VITE_API_DATABASE_URL,
+    projectId: import.meta.env.VITE_API_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_API_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_API_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_API_APP_ID,
+    measurementId: import.meta.env.VITE_API_MEASUREMENT_ID,
+  };
 
-  // const handleCopiarAssinatura = () => {
-  //   const copyBoxElement = signatureRef.current;
-  //   if (copyBoxElement) {
-  //     copyBoxElement.contentEditable = "true";
-  //     copyBoxElement.focus();
-  //     navigator.clipboard.writeText(String(copyBoxElement.innerHTML));
-  //   }
-  // };
-
-  useEffect(() => {
-    const img = document.getElementById("preview-image");
-    if (foto && img) {
-      const reader = new FileReader();
-      reader.onload = function () {
-        const dataURL = reader.result;
-        img.style.backgroundImage = `url(${dataURL})`;
-        // img.setAttribute("src", dataURL as string);
-      };
-      reader.readAsDataURL(foto);
-    }
-  }, [foto]);
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const analytics = getAnalytics(app);
 
   return (
     <div className="wrap">
@@ -104,24 +105,36 @@ function App() {
           </li>
           <li>
             <label>Selecione a foto: </label>
-            {/* <input
-              type="file"
-              value={foto}
-              onChange={(e) => {
-                setFoto(e.target.value);
-              }}
-              placeholder="Nome:"
-              maxLength={40}
-              onKeyUp={handleMaiuscula}
-            /> */}
             <input
               type="file"
               id="photo"
               name="photo"
-              onChange={(e) => {
-                if (e?.target?.files) {
-                  setFoto(e?.target?.files[0]);
+              onChange={async (e) => {
+                if (!e?.target?.files) {
+                  return;
                 }
+                const storage = getStorage();
+                const imageRef = storageRef(
+                  storage,
+                  `img-signatures/${e?.target?.files[0].name + Math.random()}`,
+                );
+                uploadBytes(imageRef, e?.target?.files[0])
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  .then((snapshot: { ref: any }) => {
+                    getDownloadURL(snapshot.ref)
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      .then((url: any) => {
+                        setImgLink(url);
+                      })
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      .catch((error: { message: any }) => {
+                        console.log(error.message);
+                      });
+                  })
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  .catch((error: { message: any }) => {
+                    console.log(error.message);
+                  });
               }}
               accept="image/*"
             />
@@ -159,10 +172,11 @@ function App() {
                   style={{
                     width: "126px",
                     height: "126px",
-                    backgroundSize: "115px",
+                    backgroundSize: "113px",
                     objectFit: "cover",
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
+                    backgroundImage: `url(${imgLink})`,
                   }}
                 >
                   <img src={background_right} />
