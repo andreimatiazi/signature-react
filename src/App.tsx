@@ -172,8 +172,8 @@ function App() {
                   style={{
                     width: "126px",
                     height: "126px",
-                    backgroundSize: "113px",
-                    objectFit: "cover",
+                    backgroundSize: "113px 113px",
+                    objectFit: "contain",
                     backgroundRepeat: "no-repeat",
                     backgroundPosition: "center",
                     backgroundImage: `url(${imgLink})`,
