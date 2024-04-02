@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import background_right from "./assets/background_right.png";
 import whats from "./assets/whats.png";
 import phone from "./assets/phone.png";
@@ -46,6 +46,7 @@ function App() {
   const app = initializeApp(firebaseConfig);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const analytics = getAnalytics(app);
+  analytics;
 
   return (
     <div className="wrap">
