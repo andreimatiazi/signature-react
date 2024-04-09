@@ -5,7 +5,9 @@ import phone from "./assets/phone.png";
 import pin from "./assets/pin.png";
 import divider_vertical from "./assets/divider_vertical.png";
 import logo from "./assets/logo.png";
+import logo_lawyer from "./assets/logo_lawyer.png";
 import qr_code from "./assets/qr_code.png";
+import qr_code_lawyer from "./assets/qr_code_lawyer.png";
 import insta from "./assets/insta.png";
 import site from "./assets/site.png";
 import divider_horizontal from "./assets/divider_horizontal.png";
@@ -22,8 +24,31 @@ import {
 import { getAnalytics } from "firebase/analytics";
 
 import "./App.css"; // Importe seus estilos aqui
+import { Button } from "@mui/material";
+
+const selectInfos = {
+  lawyer: {
+    qr_code: qr_code_lawyer,
+    logo: logo_lawyer,
+    cargo: "Advogado",
+    site: "https://www.silvaeoliveiraadvogados.com.br/",
+    insta: "https://www.instagram.com/silvaeoliveiraadv/",
+    celular: "(11) 97649-7196",
+    telefone: "(11) 2359-3409",
+  },
+  accountant: {
+    qr_code: qr_code,
+    logo: logo,
+    cargo: "Contador",
+    site: "https://silvaeoliveira.com.br/",
+    insta: "https://www.instagram.com/contabilsilvaeoliveira/",
+    celular: "(11) 99280-1287",
+    telefone: "(11) 2359-3409",
+  },
+};
 
 function App() {
+  const [type, setType] = useState<"lawyer" | "accountant">("lawyer");
   const [nome, setNome] = useState("");
   const [cargo, setCargo] = useState("");
   const [telefone, setTelefone] = useState("");
@@ -144,6 +169,22 @@ function App() {
           </li>
         </ul>
       </div>
+      <div>
+        <Button
+          variant="contained"
+          style={{
+            backgroundColor: "#AC9254",
+            color: "#fff",
+            marginTop: "1rem",
+            marginBottom: "1rem",
+          }}
+          onClick={() => {
+            setType(type === "lawyer" ? "accountant" : "lawyer");
+          }}
+        >
+          Alterar para {type === "lawyer" ? "Contador" : "Advogado"}
+        </Button>
+      </div>
       <div
         style={{
           marginBottom: "2rem",
@@ -211,7 +252,7 @@ function App() {
                           fontWeight: "inherit",
                         }}
                       >
-                        {cargo || "Contador/advogado"}
+                        {cargo || selectInfos[type].cargo}
                       </td>
                     </tr>
                     <tr>
@@ -231,9 +272,18 @@ function App() {
                       >
                         <img width={11.68} height={12.3} src={whats} />
                         <a
-                          href={`https://api.whatsapp.com/send?phone=55${celular}`}
+                          href={
+                            celular
+                              ? `https://api.whatsapp.com/send?phone=55${celular.replace(
+                                  /\D/g,
+                                  "",
+                                )}`
+                              : `https://api.whatsapp.com/send?phone=55${selectInfos[
+                                  type
+                                ].celular.replace(/\D/g, "")}`
+                          }
                         >
-                          {celular || "(11) 99999-9999"}
+                          {celular || selectInfos[type].celular}
                         </a>
                       </td>
                     </tr>
@@ -248,7 +298,7 @@ function App() {
                         height="15"
                       >
                         <img width={12.6} height={12.6} src={phone} />
-                        {telefone || "(11) 99999-9999"}
+                        {telefone || selectInfos[type].telefone}
                       </td>
                     </tr>
                     <tr>
@@ -289,7 +339,7 @@ function App() {
                       <img
                         width={111.6}
                         style={{ objectFit: "cover" }}
-                        src={logo}
+                        src={selectInfos[type].logo}
                       />
                     </td>
                   </tr>
@@ -299,20 +349,24 @@ function App() {
                   <table>
                     <tr>
                       <td>
-                        <img width={57.18} height={57.18} src={qr_code} />
+                        <img
+                          width={57.18}
+                          height={57.18}
+                          src={selectInfos[type].qr_code}
+                        />
                       </td>
                       <td>
                         <table>
                           <tr>
                             <td>
-                              <a href="https://www.instagram.com/contabilsilvaeoliveira/">
+                              <a href={selectInfos[type].insta}>
                                 <img width={25.52} height={26.13} src={insta} />
                               </a>
                             </td>
                           </tr>
                           <tr>
                             <td valign="middle">
-                              <a href="https://silvaeoliveira.com.br/">
+                              <a href={selectInfos[type].site}>
                                 <img width={25.21} height={25.52} src={site} />
                               </a>
                             </td>
