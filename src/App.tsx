@@ -182,7 +182,7 @@ function App() {
             setType(type === "lawyer" ? "accountant" : "lawyer");
           }}
         >
-          Alterar para {type === "lawyer" ? "Contador" : "Advogado"}
+          Alterar para {type === "lawyer" ? "Contabilidade" : "Advocacia"}
         </Button>
       </div>
       <div
